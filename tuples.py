@@ -26,6 +26,9 @@ def filePrompt():
 def myOpen(openFile):
     return open(openFile, 'r')
 
+def myClose(closeHand):
+    closeHand.close()
+
 myFile = filePrompt()
 try:
     fHand = myOpen(myFile)
@@ -34,7 +37,6 @@ except:
     exit()
 
 d = dict()
-commitCount = 0
 
 for line in fHand:
     # strips whitespace from left and write of string
@@ -43,7 +45,6 @@ for line in fHand:
         words = line.split()
         # email = words[1]
         d[words[1]] = d.get(words[1], 0) + 1
-print(d)
 
 listOfTuples = list()
 # data has been read now DSU
@@ -52,5 +53,35 @@ for key, val in d.items():
 listOfTuples.sort(reverse=True)
 val, key = listOfTuples[0]
 print('{0[1]} {0[0]}'.format(listOfTuples[0]))
+myClose(fHand)
 
 # Exercises 10.2
+myFile = filePrompt()
+try:
+    fHand = myOpen(myFile)
+except:
+    print("No such file or directory: {0}" % (myFile))
+    exit()
+
+d = dict()
+
+for line in fHand:
+    # strips whitespace from left and write of string
+    line = line.rstrip()
+    if line.startswith('From '):
+        words = line.split()
+        time = words[5]
+        hourMinSec = time.split(':')
+        d[hourMinSec[0]] = d.get(hourMinSec[0], 0) + 1
+
+listOfHours = list()
+# data has been read now DSU
+for hour, count in d.items():
+    listOfHours.append((hour, count))
+listOfHours.sort()
+
+print('Hour | Count')
+print('============')
+for hour, count in listOfHours:
+    print('{0}     {1}'.format(hour, count))
+myClose(fHand)
