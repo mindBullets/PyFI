@@ -9,7 +9,7 @@ try:
 
     fHand = myOpen(myFile)
 except:
-    print "No such file or directory: %s" % (myFile)
+    print("No such file or directory: %s" % (myFile))
     exit()
 
 notPrinted = 0
@@ -26,4 +26,4 @@ for line in fHand:
     dSPAM += float(line[line.find(':')+2::])
     printed += 1.0
     confidence = dSPAM/printed
-print "DSPAM: %g / Count: %g = Average Confidence: %g" % (dSPAM, printed, confidence)
+print( "DSPAM: %g / Count: %g = Average Confidence: %g" % (dSPAM, printed, confidence))
