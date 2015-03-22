@@ -1,4 +1,5 @@
 __author__ = 'MindBullets'
+import string
 
 # 10.2 tuple assignment
 txt = 'but soft what light in yonder window breaks'
@@ -85,3 +86,36 @@ print('============')
 for hour, count in listOfHours:
     print('{0}     {1}'.format(hour, count))
 myClose(fHand)
+
+# Exercise 10.3 letter frequency
+letterDict = dict()
+try:
+    letterFHand = open('romeo-full.txt', 'r')
+except:
+    print("No such file or directory: {0}".format(letterFHand))
+    exit()
+
+"""
+take a line
+convert to lowercase
+remove spaces
+count in dict
+boom
+"""
+for line in letterFHand:
+    line = line.lower().replace(' ', '').replace('\n', '')
+    for c in line:
+        if c not in string.punctuation and c not in string.digits:
+            letterDict[c] = letterDict.get(c, 0) + 1 # decorate
+
+letterFHand.close()
+
+charList = list()
+
+for k, v in letterDict.items():
+    charList.append((v, k))
+charList.sort(reverse = True) #sort
+
+print('Count | Letter\n============')
+for k, v in charList:
+    print('{0}        {1}'.format(k, v)) # un-decorate
