@@ -1,6 +1,7 @@
 __author__ = 'MindBullets'
 import socket
 import time
+import urllib.request
 
 """Super basic web browser
 mySock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -15,7 +16,7 @@ while True:
 mySock.close()
 End super basic web browser"""
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+"""s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect(('www.py4inf.com', 80))
 s.send(bytes('GET http://www.py4inf.com/cover.jpg HTTP/1.0\n\n', 'UTF-8'))
 
@@ -46,4 +47,14 @@ except:
     print("Failed to open file: {0}".format(fhand))
 
 fhand.write(picture)
-fhand.close()
+fhand.close()"""
+
+# urllib
+d = dict()
+urlHand = urllib.request.urlopen('http://www.py4inf.com/code/romeo.txt')
+for line in urlHand:
+    words = line.decode().strip().split()
+    #print(words)
+    for word in words:
+        d[word] = d.get(word, 0) + 1
+print(d)
