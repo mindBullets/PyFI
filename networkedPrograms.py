@@ -2,6 +2,7 @@ __author__ = 'MindBullets'
 import socket
 import time
 import urllib.request
+from bs4 import BeautifulSoup
 
 """Super basic web browser
 mySock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
